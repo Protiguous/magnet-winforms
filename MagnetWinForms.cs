@@ -156,8 +156,13 @@ namespace MagnetWinForms
                     {WMSZ_RIGHT + WMSZ_BOTTOM, new[] {EdgeDirection.Right, EdgeDirection.Bottom}},
                 };
 
+                // Edge list
+                EdgeDirection[] edgeList;
+                if (!map.TryGetValue(m.WParam.ToInt32(), out edgeList))
+                    edgeList = new EdgeDirection[0];
+
                 // Handle horizontal resize
-                foreach (var edgeDir in map[m.WParam.ToInt32()])
+                foreach (var edgeDir in edgeList)
                 {
                     var movingEdge = windowEdges[edgeDir];
                     var magDistance = FindClosestEdge(movingEdge);
